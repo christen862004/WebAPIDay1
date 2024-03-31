@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebAPIDay1.DTO;
 using WebAPIDay1.Models;
 
 namespace WebAPIDay1.Controllers
@@ -12,6 +13,7 @@ namespace WebAPIDay1.Controllers
 
         public DepartmentController(ITIContext _context)
         {
+            
             context = _context;
         }
         //angular postman  (attribute || Method name start with verb)
@@ -21,7 +23,8 @@ namespace WebAPIDay1.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Department> DEptList = context.Departments.ToList();
+            List<DEptDetailsDTO> DEptList = context.Departments
+                .Select(d=>new DEptDetailsDTO() { Id=d.Id,Name=d.Name}).ToList();
             //httpresponse
             return Ok(DEptList);//statuscode=200 ,body =List<Department>
         }
@@ -35,7 +38,7 @@ namespace WebAPIDay1.Controllers
         }
 
         //api/department/Ahmed
-        [HttpGet("{name:alpha}")]//verb rout templotae 
+        [HttpGet("{name}")]//verb rout templotae 
         public IActionResult GetByName(string name)
         {
             Department dept = context.Departments.FirstOrDefault(d => d.Name.Contains(name));
@@ -51,7 +54,7 @@ namespace WebAPIDay1.Controllers
                 context.Add(newDept);
                 context.SaveChanges();
                 //  return Created($"http://localhost:5084/api/Department/{newDept.Id}",newDept);//return 201 + url reouse 
-                return CreatedAtAction("GetByID", new { id = newDept.Id },newDept);
+                return CreatedAtAction(nameof(GetByID), new { id = newDept.Id },newDept);
                 //build url ==> response header "Location:url" 201 resourec add  
             }
             return BadRequest(ModelState);

@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>HTML Page Service Consumer</h1>
+    <!--Using ajax (build request (verb) ==>resopnxe dom display data)-->
+    <ul id="data"></ul>
+    
+    <input type="button" onclick="LoadData()" value="Load" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        function LoadData() {
+            $.ajax(
+                {
+                    url: '/api/Employee/1',
+                    method: 'GET', // or 'POST', 'PUT', 'DELETE', etc.
+                    //data: { Id:1,Name:"Ahmed" }, // Optional data to send request body
+                    success: function (response) {   //response status code 200
+                        // Handle successful response here
+                        console.log(response);
+                        $("#data").append("<li>" + response.id + "</li>")
+                        $("#data").append("<li>" + response.empName + "</li>")
+
+                    }
+                });
+        }
+    </script>
+</body>
+</html>
