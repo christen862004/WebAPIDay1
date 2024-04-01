@@ -31,24 +31,23 @@ namespace WebAPIDay1.Controllers
         }
 
         [HttpGet("{name:alpha}")]
-        public ActionResult<GeneralResponse> GetByName(string name)
+        public ActionResult GetByName(string name)
         {
             Employee employee = context.Employees.FirstOrDefault(e=>e.Name == name);
             
             if(employee == null)
             {
                 //badreq
-
-                return new GeneralResponse()
+                return Ok(new GeneralResponse()
                 {
                     IsPass = false,
                     Message =  "Name Not Founs"
-                };
+                });
             }
             
-            return new GeneralResponse(){
+            return Ok(new GeneralResponse(){
                 IsPass = true,
-                Message = employee};
+                Message = employee});
         }
 
 

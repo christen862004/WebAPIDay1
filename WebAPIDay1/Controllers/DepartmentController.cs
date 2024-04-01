@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebAPIDay1.DTO;
 using WebAPIDay1.Models;
@@ -20,7 +21,9 @@ namespace WebAPIDay1.Controllers
         //swagger (attribute)
 
         //api/Department :Get
+        
         [HttpGet]
+        [Authorize]//filtter check trust or not (token ==>unauthorize)
         public IActionResult GetAll()
         {
             List<DEptDetailsDTO> DEptList = context.Departments

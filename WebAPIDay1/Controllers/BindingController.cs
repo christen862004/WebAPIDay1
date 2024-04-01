@@ -1,18 +1,33 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebAPIDay1.Models;
 
 namespace WebAPIDay1.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController]//bind ,filter validation
     public class BindingController : ControllerBase
     {
+
+        [HttpPost("test")]
+        
+        public IActionResult TestVali(Student std)
+        {
+            if(ModelState.IsValid)
+            {
+                return Ok("Done");
+            }
+            
+            return BadRequest("Invalid Obj");
+        }
         //request type Get & Delete without body
         //route placeholder case sentisve
         [HttpGet("{id}")]
+        
         public IActionResult M1(int id)//primitive (QS /Route Segmate)
         {
+            
             return Ok();
         }
         //Reuest POST or PUT with bosy in request
