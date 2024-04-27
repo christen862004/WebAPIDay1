@@ -23,7 +23,7 @@ namespace WebAPIDay1.Controllers
         //api/Department :Get
         
         [HttpGet]
-        [Authorize]//filtter check trust or not (token ==>unauthorize)
+        //[Authorize]//filtter check trust or not (token ==>unauthorize)
         public IActionResult GetAll()
         {
             List<DEptDetailsDTO> DEptList = context.Departments

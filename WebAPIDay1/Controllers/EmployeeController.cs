@@ -8,11 +8,11 @@ namespace WebAPIDay1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeController : ControllerBase
+    public class OldEmployeeController : ControllerBase
     {
         private readonly ITIContext context;
 
-        public EmployeeController(ITIContext _context)
+        public OldEmployeeController(ITIContext _context)
         {
             context = _context;
         }

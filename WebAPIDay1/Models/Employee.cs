@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebAPIDay1.Models
 {
@@ -11,7 +12,7 @@ namespace WebAPIDay1.Models
 
         [ForeignKey("Department")]
         public int? DeptID { get; set; }//not allow null
-
+        [JsonIgnore]
         public Department? Department { get; set; }
     }
 }
