@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WebAPIDay1.Models
 {
@@ -12,7 +13,7 @@ namespace WebAPIDay1.Models
         [Required(ErrorMessage ="MAnager NAme Is Required")]
         public string ManagerName { get; set; }
 
-
+        [JsonIgnore]//dotn serialize
         public List<Employee>? EmpList { get; set; }
     }
 }
